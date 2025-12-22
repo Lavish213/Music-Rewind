@@ -1,65 +1,60 @@
-// LOCATION: src/components/timeline/YearSelector.tsx
-import React, { useState } from "react";
-import { View, ScrollView, Pressable, StyleSheet } from "react-native";
-import { AppText } from "../AppText";
-import { colors, spacing, radius } from "../../tokens";
+import React from "react";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 
-const YEARS = ["2008", "2010", "2012", "2014", "2016", "2018", "2020", "2022"];
+type Props = {
+  years: number[];
+  selectedYear: number | null;
+  onSelectYear: (year: number | null) => void;
+};
 
-export function YearSelector() {
-  const [active, setActive] = useState<string>(YEARS[0]);
-
+export function YearSelector({
+  years,
+  selectedYear,
+  onSelectYear,
+}: Props) {
   return (
-    <View style={styles.wrap}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.row}
-      >
-        {YEARS.map((y) => {
-          const isActive = y === active;
-          return (
-            <Pressable
-              key={y}
-              onPress={() => setActive(y)}
-              style={[
-                styles.chip,
-                isActive && styles.chipActive,
-              ]}
-            >
-              <AppText
-                variant="body"
-                style={{ color: isActive ? colors.text.inverse : colors.text.primary }}
-              >
-                {y}
-              </AppText>
-            </Pressable>
-          );
-        })}
-      </ScrollView>
+    <View style={styles.container}>
+      {/* All */}
+      <Pressable onPress={() => onSelectYear(null)}>
+        <Text
+          style={[
+            styles.year,
+            selectedYear === null && styles.selected,
+          ]}
+        >
+          All
+        </Text>
+      </Pressable>
+
+      {/* Individual years */}
+      {years.map((year) => (
+        <Pressable key={year} onPress={() => onSelectYear(year)}>
+          <Text
+            style={[
+              styles.year,
+              selectedYear === year && styles.selected,
+            ]}
+          >
+            {year}
+          </Text>
+        </Pressable>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: {
-backgroundColor: colors.background.card,
-    paddingVertical: spacing.sm,
+  container: {
+    flexDirection: "row",
+    gap: 12,
+    paddingVertical: 12,
   },
-  row: {
-    paddingHorizontal: spacing.lg,
-    gap: spacing.sm,
+  year: {
+    fontSize: 16,
+    color: "#888",
   },
-  chip: {
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.md,
-  borderRadius: radius.lg,
-    backgroundColor: colors.background.cardSoft,
-    borderWidth: 1,
-    borderColor: colors.border.light,
-  },
-  chipActive: {
-    backgroundColor: colors.brand.primary,
-    borderColor: colors.brand.primary,
+  selected: {
+    fontWeight: "700",
+    color: "#000",
   },
 });

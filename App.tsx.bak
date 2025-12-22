@@ -1,0 +1,3 @@
+// App.tsx — FINAL, PROD, DO NOT TOUCH AGAIN
+
+import "expo-router/entry";

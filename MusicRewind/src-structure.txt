@@ -1,0 +1,2 @@
+frontend/src  [error opening dir]
+backend/src  [error opening dir]

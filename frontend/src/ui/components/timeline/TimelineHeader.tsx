@@ -1,8 +1,9 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import { AppText } from "@components/AppText";
-import { colors, spacing } from "@tokens/index";
+import { AppText } from "../AppText";
+import { colors, spacing } from "../../tokens";
+
 
 export function TimelineHeader() {
   return (

@@ -1,23 +1,41 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
-
-import { AppText } from "..";
+import { AppText } from "../AppText";
 import { colors, spacing, radius, shadows } from "../../tokens";
-export function SongMemoryCard() {
+type SongMemoryCardProps = {
+  title: string;
+  artist: string;
+  year: number;
+  note: string;
+  imageUrl?: string;
+};
+
+export function SongMemoryCard({
+  title,
+  artist,
+  year,
+  note,
+  imageUrl,
+}: SongMemoryCardProps) {
   return (
     <View style={styles.card}>
       <Image
-        source={{ uri: "https://via.placeholder.com/300" }}
+        source={{
+          uri: imageUrl ?? "https://via.placeholder.com/300",
+        }}
         style={styles.cover}
       />
 
       <AppText variant="title" style={styles.title}>
-        Electric Feel
+        {title}
       </AppText>
-      <AppText variant="muted">MGMT • 2007</AppText>
+
+      <AppText variant="muted">
+        {artist} • {year}
+      </AppText>
 
       <AppText variant="body" style={styles.context}>
-        You played this most during late-night drives.
+        {note}
       </AppText>
     </View>
   );

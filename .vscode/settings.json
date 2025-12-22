@@ -1,3 +1,5 @@
 {
-    "python-envs.pythonProjects": []
+  "python-envs.pythonProjects": [],
+  "cSpell.words": ["Pressable", "musicrewind", "fastapi", "sqlalchemy", "uvicorn"]
 }
+
